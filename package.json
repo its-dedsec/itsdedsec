@@ -1,3 +1,4 @@
+npm install --save-dev @types/react @types/node
 {
   "name": "my-portfolio",
   "version": "1.0.0",

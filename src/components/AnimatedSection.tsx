@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
-const AnimatedSection = ({ children, className = '' }) => {
-  const [isVisible, setIsVisible] = useState(false);
+interface AnimatedSectionProps {
+  children: ReactNode;
+}
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting));
-    const element = document.querySelector('.animate-section');
-    if (element) observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
+const AnimatedSection = ({ children }: AnimatedSectionProps) => {
   return (
-    <div
-      className={`animate-section transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      } ${className}`}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
